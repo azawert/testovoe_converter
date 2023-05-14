@@ -1,18 +1,13 @@
 import { FC, useEffect, useState } from "react";
-import Select from "react-select";
+import Select, { SingleValue } from "react-select";
 import styles from "./home.module.scss";
 import { api } from "../../api";
 import { ApiResponseCurrencies } from "../../types/response.type";
 import { Loader } from "../../components/loader/Loader";
 import { Button } from "../../components/button/Button";
 import { useHistory } from "react-router-dom";
-import { options } from "../../constants/select-options";
+import { IOption, options } from "../../constants/select-options";
 
-enum ECurrencies {
-  USD = "USD",
-  EUR = "EUR",
-  RUB = "RUB",
-}
 type TCurrency = {
   value: number;
   code: string;
@@ -21,16 +16,15 @@ type TCurrency = {
 export const Home: FC = () => {
   const { push } = useHistory();
 
-  const [baseCurrency, setBaseCurrency] = useState<ECurrencies>(
-    ECurrencies.RUB
-  );
+  const [baseCurrency, setBaseCurrency] = useState<IOption>(options[0]);
   const [currencies, setCurrencies] = useState<TCurrency[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  const defaultOption = options.find((option) => option.value === baseCurrency);
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const handleCurrencyChange = (selectedOption: any) => {
-    setBaseCurrency(selectedOption.value);
+  const handleCurrencyChange = (
+    selectedOption: SingleValue<{ value: string; label: string }>
+  ) => {
+    if (!selectedOption) return;
+    setBaseCurrency(selectedOption);
   };
   const handleClickNavigateToConvertPage = () => {
     push("/convert");
@@ -67,7 +61,7 @@ export const Home: FC = () => {
       <div className={styles.select_wrapper}>
         <Select
           options={options}
-          defaultValue={defaultOption}
+          defaultValue={options[0]}
           onChange={handleCurrencyChange}
         />
         <Button onClick={fetchData}>Обновить</Button>
@@ -76,13 +70,13 @@ export const Home: FC = () => {
         <Loader />
       ) : (
         currencies.map((currency) => {
-          if (currency.code == baseCurrency) {
+          if (currency.code == baseCurrency.label) {
             return null;
           } else {
             return (
               <div className={styles.currency} key={currency.code}>
                 <span>
-                  1 {baseCurrency} = {currency.value} {currency.code}
+                  1 {baseCurrency.label} = {currency.value} {currency.code}
                 </span>
               </div>
             );

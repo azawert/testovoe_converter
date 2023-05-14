@@ -7,10 +7,7 @@ import styles from "./convertpage.module.scss";
 import { options } from "../../constants/select-options";
 import { ArrowIcon } from "../../components/arrow-icon/ArrowIcon";
 import { api } from "../../api";
-import {
-  ApiResponseCurrencies,
-  IConvertResponse,
-} from "../../types/response.type";
+import { IConvertResponse } from "../../types/response.type";
 export const ConvertPage: FC = () => {
   const { push } = useHistory();
   const handleGoHomePageLink = () => {
@@ -58,6 +55,7 @@ export const ConvertPage: FC = () => {
   useEffect(() => {
     if (!valueFrom) return;
     fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currencyFrom, currencyTo]);
   return (
     <div className={styles.wrapper}>
