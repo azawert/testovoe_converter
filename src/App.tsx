@@ -1,4 +1,3 @@
-import { Home } from "./pages/home/Home";
 import "./index.scss";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { routes } from "./routes/routes";
