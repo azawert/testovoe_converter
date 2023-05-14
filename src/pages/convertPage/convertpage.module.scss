@@ -1,0 +1,26 @@
+.input_select_wrapper {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  input {
+    margin-right: 15px;
+  }
+}
+
+.convert_button {
+  padding: 5px;
+  margin-bottom: 20px;
+}
+
+.change_currencies_button {
+  padding: 2.5px;
+}
+
+.button_wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+.footer_button {
+  display: flex;
+  justify-content: center;
+}

@@ -1,0 +1,17 @@
+button {
+  background-color: #262e3e;
+  border: 1px solid #384257;
+  padding: 10px;
+  border-radius: 0.3rem;
+  color: white;
+  font-size: 20px;
+  margin-top: 10px;
+  align-self: center;
+  transition: all 0.1s ease;
+  cursor: pointer;
+  &:hover {
+    -webkit-box-shadow: -2px -1px 16px 0px rgba(203, 221, 234, 0.2);
+    -moz-box-shadow: -2px -1px 16px 0px rgba(203, 221, 234, 0.2);
+    box-shadow: -2px -1px 16px 0px rgba(203, 221, 234, 0.2);
+  }
+}

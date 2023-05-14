@@ -1,0 +1,18 @@
+.currency {
+  border: 1px solid white;
+  padding: 20px;
+  border-radius: 10px;
+  margin-top: 10px;
+  color: white;
+  transition: all 0.3s ease;
+  &:hover {
+    -webkit-box-shadow: 13px -1px 16px 0px rgba(79, 101, 118, 0.2);
+    -moz-box-shadow: 13px -1px 16px 0px rgba(79, 101, 118, 0.2);
+    box-shadow: 13px -1px 16px 0px rgba(79, 101, 118, 0.2);
+  }
+}
+
+.select_wrapper {
+  display: flex;
+  flex-direction: column;
+}
