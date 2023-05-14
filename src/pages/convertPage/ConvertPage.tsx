@@ -2,7 +2,7 @@ import { ChangeEvent, FC, useEffect, useState } from "react";
 import { Input } from "../../components/input/Input";
 import { Button } from "../../components/button/Button";
 import { useHistory } from "react-router-dom";
-import Select from "react-select";
+import Select, { SingleValue } from "react-select";
 import styles from "./convertpage.module.scss";
 import { options } from "../../constants/select-options";
 import { ArrowIcon } from "../../components/arrow-icon/ArrowIcon";
@@ -31,11 +31,17 @@ export const ConvertPage: FC = () => {
     setValueTo(e.target.value);
   };
 
-  const handleCurrencyFromChange = (selectedOption: any) => {
+  const handleCurrencyFromChange = (
+    selectedOption: SingleValue<{ value: string; label: string }>
+  ) => {
+    if (!selectedOption) return;
     setCurrencyFrom(selectedOption);
   };
 
-  const handleCurrencyToChange = (selectedOption: any) => {
+  const handleCurrencyToChange = (
+    selectedOption: SingleValue<{ value: string; label: string }>
+  ) => {
+    if (!selectedOption) return;
     setCurrencyTo(selectedOption);
   };
   const handleChangeCurrencyButtonClick = () => {
