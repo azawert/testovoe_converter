@@ -15,8 +15,10 @@ type TCurrency = {
 
 export const Home: FC = () => {
   const { push } = useHistory();
-
-  const [baseCurrency, setBaseCurrency] = useState<IOption>(options[0]);
+  const defaultValueForBaseCurrency = options[0];
+  const [baseCurrency, setBaseCurrency] = useState<IOption>(
+    defaultValueForBaseCurrency
+  );
   const [currencies, setCurrencies] = useState<TCurrency[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -33,7 +35,7 @@ export const Home: FC = () => {
     setIsLoading(true);
     api
       .get<ApiResponseCurrencies>(
-        `latest?&base=${baseCurrency}&symbols=EUR,USD,RUB`
+        `latest?&base=${baseCurrency.label}&symbols=EUR,USD,RUB`
       )
       .then((d) => {
         const responseData = d.data.rates;
@@ -51,9 +53,10 @@ export const Home: FC = () => {
       .finally(() => setIsLoading(false));
   };
   useEffect(() => {
-    // fetchData();
-    // const intervalId = setInterval(fetchData, 60000);
-    // return () => clearInterval(intervalId);
+    fetchData();
+    const intervalId = setInterval(fetchData, 60000);
+    return () => clearInterval(intervalId);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [baseCurrency]);
 
   return (
